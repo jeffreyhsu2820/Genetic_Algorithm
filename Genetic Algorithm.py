@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[541]:
-
-
 import numpy as np
 from numpy.random import randint
 from random import gauss, randrange, random, choices, sample  #產生隨機數在[0,1)
@@ -12,10 +9,6 @@ import copy
 
 
 # ## 1.Deciding the initial population pool
-
-# In[542]:
-
-
 #產生有一個基因序列有幾個數字
 def individual(number_of_genes, upper_limit, lower_limit):
     individual=[]
@@ -25,8 +18,6 @@ def individual(number_of_genes, upper_limit, lower_limit):
 
 
 # ### *The population designed right here can't be switched in the following process
-
-# In[543]:
 
 
 #決定一開始要有幾個population
@@ -44,14 +35,10 @@ def population(constraint, equation, num_of_individuals, number_of_genes, upper_
 
 # ## 2.Caculate the fitness value for each individual
 
-# In[544]:
-
 
 def fitness_value(population):
     return np.array(population).dot(points.T)
 
-
-# In[545]:
 
 
 def weight_calculation(population):
@@ -63,8 +50,6 @@ def weight_calculation(population):
 
 
 # ## 3. Reproducing operator 
-
-# In[546]:
 
 
 def selection(population, num_of_selection):
@@ -79,9 +64,6 @@ def selection(population, num_of_selection):
 
 # ## 4. Mutation operator
 
-# In[547]:
-
-
 def mutation(tmp):
     num=randint(0,number_of_genes-1)
     if tmp[num]==0:
@@ -92,9 +74,6 @@ def mutation(tmp):
 
 
 # ## 5. Crossover and mutation process
-
-# In[593]:
-
 
 def crossover_then_mutation(population):
     pop=copy.deepcopy(population)
@@ -109,9 +88,6 @@ def crossover_then_mutation(population):
 
 
 # ## 6. Combine all the operator above and set the termination condition
-
-# In[656]:
-
 
 def main(constraint, equation, num_of_individuals, number_of_genes, upper_limit, lower_limit, max_num_generation): 
     pop=population(constraint, equation, num_of_individuals, number_of_genes, upper_limit, lower_limit)
@@ -128,9 +104,6 @@ def main(constraint, equation, num_of_individuals, number_of_genes, upper_limit,
 
 # ## 7. Run it!!
 
-# In[657]:
-
-
 number_of_genes=6
 upper_limit=1
 lower_limit=0
@@ -140,10 +113,6 @@ num_of_individuals=4
 equation = np.array([15,3,2,5,9,20])
 points=np.array([15,7,10,5,8,17])
 max_num_generation=200
-
-
-# In[658]:
-
 
 main(constraint, equation, num_of_individuals, number_of_genes, upper_limit, lower_limit, max_num_generation)
 
