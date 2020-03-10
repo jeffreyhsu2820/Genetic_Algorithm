@@ -50,8 +50,7 @@ def weight_calculation(population):
 
 
 # ## 3. Reproducing operator 
-
-
+#選最大fitness value的人 剩下的從剩下的pool挑
 def selection(population, num_of_selection):
     _, max_score, where=weight_calculation(population)
     pop=population.copy()
@@ -63,7 +62,7 @@ def selection(population, num_of_selection):
 
 
 # ## 4. Mutation operator
-
+#針對做crossover的其中一個string做
 def mutation(tmp):
     num=randint(0,number_of_genes-1)
     if tmp[num]==0:
@@ -74,7 +73,6 @@ def mutation(tmp):
 
 
 # ## 5. Crossover and mutation process
-
 def crossover_then_mutation(population):
     pop=copy.deepcopy(population)
     tmp=selection(population,2)
@@ -82,13 +80,12 @@ def crossover_then_mutation(population):
     tmp[0]=mutation(tmp[0])
     for x in tmp:
         if equation.dot(np.array(x).T)<=constraint:
-            if [int(y) for y in x] not in pop:
+            if [int(y) for y in x] not in pop:   #想要讓pool裡的人distinct
                 pop.append(x)
     return pop
 
 
 # ## 6. Combine all the operator above and set the termination condition
-
 def main(constraint, equation, num_of_individuals, number_of_genes, upper_limit, lower_limit, max_num_generation): 
     pop=population(constraint, equation, num_of_individuals, number_of_genes, upper_limit, lower_limit)
     i=0
@@ -101,9 +98,7 @@ def main(constraint, equation, num_of_individuals, number_of_genes, upper_limit,
     tweight=equation.dot(np.array(pop[int(np.argwhere(c_score==max(c_score))[0])]).T)
     return pop[int(np.argwhere(c_score==max(c_score))[0])],max(c_score), tweight
 
-
 # ## 7. Run it!!
-
 number_of_genes=6
 upper_limit=1
 lower_limit=0
